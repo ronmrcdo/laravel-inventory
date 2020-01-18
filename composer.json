@@ -1,0 +1,52 @@
+{
+    "name": "ronmrcdo/inventory",
+    "description": "An Inventory Management Package for products",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ron Mercado",
+            "email": "ronmercadoaa@gmail.com"
+        }
+    ],
+    "keywords": ["Inventory", "Product", "Laravel"],
+    "require": {
+        "illuminate/support": "^5.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "^4.0",
+        "sempro/phpunit-pretty-print": "^1.0",
+        "fzaninotto/faker": "^1.9@dev"
+    },
+    "autoload": {
+        "files": [
+            "src/Utilities/Helper.php"
+        ],
+        "psr-4": {
+            "Ronmrcdo\\Inventory\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ronmrcdo\\Inventory\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ronmrcdo\\Inventory\\ProductServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit --filter 'Ronmrcdo\\Inventory\\Tests"
+        ]
+    },
+    "scripts-descriptions": {
+        "test": "Run Unit Testing"
+    },
+    "minimum-stability": "dev"
+}
