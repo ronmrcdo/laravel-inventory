@@ -1,4 +1,4 @@
-# Inventory Package for Laravel :construction: WIP :construction:
+# :construction: Inventory Package for Laravel
 
 This package is currently in development
 
