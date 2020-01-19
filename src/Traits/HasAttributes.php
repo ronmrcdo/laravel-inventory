@@ -11,7 +11,8 @@ trait HasAttributes
 	 * Create a product attribute
 	 * 
 	 * @param array $attributeData
-	 * @return void
+	 * @throw  \Ronmrcdo\Inventory\Exceptions\InvalidAttributeException
+	 * @return $this
 	 */
 	public function createAttribute(array $attributeData)
 	{
@@ -37,7 +38,7 @@ trait HasAttributes
 	/**
 	 * Relation on Attribute Model
 	 * 
-	 * @return HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany $this
 	 */
 	public function attributes(): HasMany
 	{

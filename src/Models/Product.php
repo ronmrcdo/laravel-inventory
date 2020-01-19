@@ -5,10 +5,11 @@ namespace Ronmrcdo\Inventory\Models;
 use Illuminate\Database\Eloquent\Model;
 use Ronmrcdo\Inventory\Traits\Sluggable;
 use Ronmrcdo\Inventory\Traits\HasAttributes;
+use Ronmrcdo\Inventory\Traits\HasCategories;
 
 class Product extends Model
 {
-	use HasAttributes, Sluggable;
+	use HasAttributes, Sluggable, HasCategories;
 
 	/**
 	 * Defined table name

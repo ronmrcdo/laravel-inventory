@@ -2,10 +2,8 @@
 
 namespace Ronmrcdo\Inventory\Tests;
 
-use Ronmrcdo\Inventory\Models\Category;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 abstract class TestCase extends OrchestraTestCase
 {
@@ -15,6 +13,7 @@ abstract class TestCase extends OrchestraTestCase
     {
         parent::setUp();
 
+		// Load the package factories
         $this->withFactories(__DIR__.'/../database/factories');
 	}
 }
