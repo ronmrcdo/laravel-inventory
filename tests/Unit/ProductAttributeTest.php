@@ -17,7 +17,7 @@ class ProductAttributeTest extends TestCase
 		
 		$attribute = factory(Attribute::class)->make();
 
-		$product->addAttribute($attribute->toArray());
+		$product->addAttribute($attribute['name']);
 
 		$this->assertTrue($product->hasAttributes());
 		$this->assertTrue($product->hasAttribute($attribute->name));
@@ -64,8 +64,20 @@ class ProductAttributeTest extends TestCase
 		$attributes = factory(Attribute::class, $size)->make();
 
 		$attributes->each(function($attribute) use ($product) {
-			$product->addAttribute($attribute->toArray());
+			$product->addAttribute($attribute['name']);
 		});
+
+		$this->assertEquals($size, sizeof($product->loadAttributes()->toArray()), 'Attributes should be equal to product attribute');
+	}
+
+	/** @test */
+	public function itShouldCreateMultipleAttributesUsingArray()
+	{
+		$product = factory(Product::class)->create();
+		$size = rand(2,4);
+		$attributes = factory(Attribute::class, $size)->make();
+
+		$product->addAttribute($attributes->toArray());
 
 		$this->assertEquals($size, sizeof($product->loadAttributes()->toArray()), 'Attributes should be equal to product attribute');
 	}

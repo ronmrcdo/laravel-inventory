@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-
 class AttributeValue extends Model
 {
     /**
@@ -49,5 +48,15 @@ class AttributeValue extends Model
     public function attribute(): BelongsTo
     {
         return $this->belongsTo('Ronmrcdo\Inventory\Models\Attribute', 'product_attribute_id');
+    }
+
+    /**
+     * Relation of the attribute option to the variant
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany $this
+     */
+    public function variations(): HasMany
+    {
+        return $this->hasMany('Ronmrcdo\Inventory\Models\ProductVariant');
     }
 }

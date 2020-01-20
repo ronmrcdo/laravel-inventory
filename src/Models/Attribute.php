@@ -40,8 +40,16 @@ class Attribute extends Model
         'id'
     ];
 
-    public function addValue(string $value)
+    /**
+     * Add Value on the attribute
+     * 
+     * @param string|array $value
+     */
+    public function addValue($value)
     {
+        if (is_array($value)) {
+            return $this->values()->createMany($value);
+        }
         return $this->values()->create(['value' => $value]);
     }
 

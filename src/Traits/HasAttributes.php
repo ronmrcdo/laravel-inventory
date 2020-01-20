@@ -15,16 +15,19 @@ trait HasAttributes
 	 * @throw  \Ronmrcdo\Inventory\Exceptions\InvalidAttributeException
 	 * @return $this
 	 */
-	public function addAttribute(array $attributeData)
+	public function addAttribute($attr)
 	{
 		DB::beginTransaction();
 
 		try {
-
-			$this->attributes()->create($attributeData);
+			if (is_array($attr)) {
+				$this->attributes()->createMany($attr);
+			} else {
+				$this->attributes()->create(['name' => $attr]);
+			}
 
 			DB::commit();
-		} catch (\Throwable $e) { // No matter what error will occur we should throw invalidAttribute
+		} catch (\Throwable $err) { // No matter what error will occur we should throw invalidAttribute
 			DB::rollBack();
 
 			throw new InvalidAttributeException("Invalid attribute", 422);
@@ -66,13 +69,13 @@ trait HasAttributes
 	 * Add Option Value on the attribute
 	 * 
 	 * @param string $option
-	 * @param string $value
+	 * @param string|array $value
 	 * 
 	 * @throw \Ronmrcdo\Inventory\Exceptions\InvalidAttributeException
 	 * 
 	 * @return \Ronmrcdo\Inventory\Models\AttributeValue
 	 */
-	public function addAttributeOptionTo(string $option, string $value)
+	public function addAttributeOptionTo(string $option, $value)
 	{
 		$attribute = $this->attributes()->where('name', $option)->first();
 
