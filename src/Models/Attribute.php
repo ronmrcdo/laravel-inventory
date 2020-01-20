@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Ronmrcdo\Inventory\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -39,6 +39,11 @@ class Attribute extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function addValue(string $value)
+    {
+        return $this->values()->create(['value' => $value]);
+    }
 
     /**
      * Relation of the attribute to the product

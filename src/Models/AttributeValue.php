@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Ronmrcdo\Inventory\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,7 +29,7 @@ class AttributeValue extends Model
      * @var array
      */
     protected $fillable = [
-        'product_id', 'product_attribute_id', 'value'
+        'product_attribute_id', 'value'
     ];
 
     /**
@@ -40,16 +40,6 @@ class AttributeValue extends Model
     protected $guarded = [
         'id'
     ];
-
-    /**
-     * Product Relationship
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo $this
-     */
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo('Ronmrcdo\Inventory\Models\Product');
-    }
 
     /**
      * Product Relationship

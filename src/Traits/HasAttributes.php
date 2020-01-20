@@ -2,6 +2,7 @@
 
 namespace Ronmrcdo\Inventory\Traits;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ronmrcdo\Inventory\Exceptions\InvalidAttributeException;
 
@@ -14,11 +15,18 @@ trait HasAttributes
 	 * @throw  \Ronmrcdo\Inventory\Exceptions\InvalidAttributeException
 	 * @return $this
 	 */
-	public function createAttribute(array $attributeData)
+	public function addAttribute(array $attributeData)
 	{
-		$attribute = $this->attributes()->create($attributeData);
+		DB::beginTransaction();
 
-		if (! $attribute) {
+		try {
+
+			$this->attributes()->create($attributeData);
+
+			DB::commit();
+		} catch (\Throwable $e) { // No matter what error will occur we should throw invalidAttribute
+			DB::rollBack();
+
 			throw new InvalidAttributeException("Invalid attribute", 422);
 		}
 
@@ -33,6 +41,56 @@ trait HasAttributes
 	public function hasAttributes(): bool
 	{
 		return !! $this->attributes()->count();
+	}
+
+	/**
+	 * Assert if the product has this attributes
+	 * 
+	 * @param string|int $key
+	 * 
+	 * @return bool
+	 */
+	public function hasAttribute($key): bool
+	{
+		// If the arg is a numeric use the id else use the name
+		if (is_numeric($key)) {
+			return $this->attributes()->where('id', $key)->exists();
+		} elseif (is_string($key)) {
+			return $this->attributes()->where('name', $key)->exists();
+		}
+
+		return false;
+	}
+
+	/**
+	 * Add Option Value on the attribute
+	 * 
+	 * @param string $option
+	 * @param string $value
+	 * 
+	 * @throw \Ronmrcdo\Inventory\Exceptions\InvalidAttributeException
+	 * 
+	 * @return \Ronmrcdo\Inventory\Models\AttributeValue
+	 */
+	public function addAttributeOptionTo(string $option, string $value)
+	{
+		$attribute = $this->attributes()->where('name', $option)->first();
+
+		if (! $attribute) {
+			throw new InvalidAttributeException("Invalid attribute", 422);
+		}
+
+		return $attribute->addValue($value);
+	}
+
+	/**
+	 * Get Product Attributes
+	 * 
+	 * 
+	 */
+	public function loadAttributes()
+	{
+		return $this->attributes()->get()->load('values');
 	}
 
 	/**
