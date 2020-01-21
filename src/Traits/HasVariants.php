@@ -14,6 +14,11 @@ trait HasVariants
 	/**
 	 * Add Variant to the product
 	 * 
+	 * $variant = array(
+	 *  'sku' => string,
+	 *  'options' => string, <-- Attribute name
+	 *  'value' => string, <-- Attribute value
+	 * )
 	 * @param array $variant
 	 */
 	public function addVariant($variant)
@@ -48,13 +53,26 @@ trait HasVariants
 	}
 
 	/**
+	 * Static function that automatically query for the sku
+	 * 
+	 * @param string $sku
+	 * @return \Ronmrcdo\Inventory\Models\Product
+	 */
+	public static function findBySku(string $sku)
+	{
+		return static::whereHas('skus', function ($q) use ($sku) {
+			$q->where('code', $sku);
+		})->firstOrFail();
+	}
+
+	/**
 	 * Scope for Find Product by sku
 	 * 
 	 * @param \Illuminate\Database\Eloquent\Builder  $query
 	 * @param string $sku
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
-	public function scopeFindBySku(Builder $query, string $sku): Builder
+	public function scopeWhereSku(Builder $query, string $sku): Builder
 	{
 		return $query->whereHas('skus', function ($q) use ($sku) {
 			$q->where('code', $sku);

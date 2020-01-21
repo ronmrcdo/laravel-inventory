@@ -3,6 +3,7 @@
 namespace Ronmrcdo\Inventory\Tests\Unit;
 
 use Ronmrcdo\Inventory\Models\Product;
+use Ronmrcdo\Inventory\Adapter\ProductAdapter;
 use Ronmrcdo\Inventory\Models\Attribute;
 use Ronmrcdo\Inventory\Models\AttributeValue;
 use Ronmrcdo\Inventory\Exceptions\InvalidAttributeException;
