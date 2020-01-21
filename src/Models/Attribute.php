@@ -48,7 +48,12 @@ class Attribute extends Model
     public function addValue($value)
     {
         if (is_array($value)) {
-            return $this->values()->createMany($value);
+            $terms = collect($value)->map(function ($term) {
+                return ['value' => $term];
+            })
+            ->values()
+            ->toArray();
+            return $this->values()->createMany($terms);
         }
         return $this->values()->create(['value' => $value]);
     }

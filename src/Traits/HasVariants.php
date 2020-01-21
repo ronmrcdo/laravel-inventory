@@ -16,8 +16,7 @@ trait HasVariants
 	 * 
 	 * $variant = array(
 	 *  'sku' => string,
-	 *  'options' => string, <-- Attribute name
-	 *  'value' => string, <-- Attribute value
+	 * 	'variation => []
 	 * )
 	 * @param array $variant
 	 */
@@ -28,14 +27,17 @@ trait HasVariants
 		try {
 			// Create the sku first
 			$sku = $this->skus()->create(['code' => $variant['sku']]);
-			$attribute = $this->attributes()->where('name', $variant['options'])->firstOrFail();
-			$value = $attribute->values()->where('value', $variant['value'])->firstOrFail();
 
-			$this->variations()->create([
-				'product_sku_id' => $sku->id,
-				'product_attribute_id' => $attribute->id,
-				'product_attribute_value_id' => $value->id
-			]);
+			foreach ($variant['variation'] as $item) {
+				$attribute = $this->attributes()->where('name', $item['option'])->firstOrFail();
+				$value = $attribute->values()->where('value', $item['value'])->firstOrFail();
+	
+				$this->variations()->create([
+					'product_sku_id' => $sku->id,
+					'product_attribute_id' => $attribute->id,
+					'product_attribute_value_id' => $value->id
+				]);
+			}
 			
 			DB::commit();
 		} catch (ModelNotFoundException $err) { // 
@@ -46,10 +48,15 @@ trait HasVariants
 		} catch (\Throwable $err) {
 			DB::rollBack();
 
-			throw new InvalidVariantException("Invalid Product Variant data given", 400);
+			throw new InvalidVariantException('Invalid Variant Given', 400);
 		}
 
 		return $this;
+	}
+
+	public function hasSku(): bool
+	{
+		return !! $this->skus()->count();
 	}
 
 	/**
@@ -77,6 +84,23 @@ trait HasVariants
 		return $query->whereHas('skus', function ($q) use ($sku) {
 			$q->where('code', $sku);
 		});
+	}
+
+	/**
+	 * Create an sku for the product that has no
+	 * possible variation
+	 * 
+	 * @param string $code
+	 * @throw \Ronmrcdo\Inventory\Exceptions\InvalidVariantException
+	 * @return void
+	 */
+	public function addSku(string $code): void
+	{
+		if ($this->hasAttributes()) {
+			throw new InvalidVariantException("Cannot add single SKU due to there's a possible variation", 400);
+		}
+
+		$this->skus()->create(['code' => $code]);
 	}
 
 	/**

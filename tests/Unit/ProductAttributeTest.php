@@ -3,7 +3,6 @@
 namespace Ronmrcdo\Inventory\Tests\Unit;
 
 use Ronmrcdo\Inventory\Models\Product;
-use Ronmrcdo\Inventory\Adapter\ProductAdapter;
 use Ronmrcdo\Inventory\Models\Attribute;
 use Ronmrcdo\Inventory\Models\AttributeValue;
 use Ronmrcdo\Inventory\Exceptions\InvalidAttributeException;
@@ -34,7 +33,7 @@ class ProductAttributeTest extends TestCase
 
 		$option = factory(AttributeValue::class)->make();
 
-		$product->addAttributeOptionTo($attribute->name, $option->value);
+		$product->addAttributeTerm($attribute->name, $option->value);
 
 		$this->assertTrue($attribute->values()->count() > 0);
 	}
@@ -51,7 +50,7 @@ class ProductAttributeTest extends TestCase
 		$options = factory(AttributeValue::class, $size)->make();
 
 		$options->each(function ($option) use ($product, $attribute) {
-			$product->addAttributeOptionTo($attribute->name, $option->value);
+			$product->addAttributeTerm($attribute->name, $option->value);
 		});
 
 		$this->assertTrue(sizeof($product->loadAttributes()->first()->toArray()['values']) >= $size, 'It should attach all the options');
@@ -78,7 +77,7 @@ class ProductAttributeTest extends TestCase
 		$size = rand(2,4);
 		$attributes = factory(Attribute::class, $size)->make();
 
-		$product->addAttribute($attributes->toArray());
+		$product->addAttributes($attributes->toArray());
 
 		$this->assertEquals($size, sizeof($product->loadAttributes()->toArray()), 'Attributes should be equal to product attribute');
 	}
@@ -90,16 +89,6 @@ class ProductAttributeTest extends TestCase
 
 		$product = factory(Product::class)->create();
 		
-		$product->addAttributeOptionTo('test', 'test');
-	}
-
-	/** @test */
-	public function itShouldThrowInvalidAttributeOnAddingAttribute()
-	{
-		$this->expectException(InvalidAttributeException::class);
-
-		$product = factory(Product::class)->create();
-
-		$product->addAttribute(['test' => 'test']);
+		$product->addAttributeTerm('test', 'test');
 	}
 }
