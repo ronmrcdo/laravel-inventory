@@ -17,6 +17,9 @@ class CreateProductSkusTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->string('code')->unique();
+            $table->decimal('price', 8, 2)->default(0);
+            $table->decimal('cost', 8, 2)->default(0);
+
 
             $table->foreign('product_id')
                 ->references('id')

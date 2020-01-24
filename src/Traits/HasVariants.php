@@ -9,6 +9,7 @@ use Ronmrcdo\Inventory\Exceptions\InvalidVariantException;
 use Ronmrcdo\Inventory\Exceptions\InvalidAttributeException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Ronmrcdo\Inventory\Models\ProductVariant;
+use Ronmrcdo\Inventory\Models\ProductSku;
 
 trait HasVariants
 {
@@ -30,7 +31,11 @@ trait HasVariants
 			}
 
 			// Create the sku first, so basically you can't add new attributes to the sku
-			$sku = $this->skus()->create(['code' => $variant['sku']]);
+			$sku = $this->skus()->create([
+				'code' => $variant['sku'],
+				'price' => $variant['price'],
+				'cost' => $variant['cost']
+			]);
 
 			foreach ($variant['variation'] as $item) {
 				$attribute = $this->attributes()->where('name', $item['option'])->firstOrFail();
@@ -56,6 +61,15 @@ trait HasVariants
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Get the variations
+	 * 
+	 */
+	public function getVariations()
+	{
+		return $this->skus;
 	}
 
 	/**
@@ -146,9 +160,7 @@ trait HasVariants
 	 */
 	public static function findBySku(string $sku)
 	{
-		return static::whereHas('skus', function ($q) use ($sku) {
-			$q->where('code', $sku);
-		})->firstOrFail();
+		return ProductSku::where('code', $sku)->firstOrFail();
 	}
 
 	/**

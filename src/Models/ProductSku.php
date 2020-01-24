@@ -28,7 +28,7 @@ class ProductSku extends Model
      * @var array
      */
     protected $fillable = [
-        'product_id', 'code'
+        'product_id', 'code', 'price', 'cost'
     ];
 
     /**

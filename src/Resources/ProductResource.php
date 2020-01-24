@@ -22,7 +22,9 @@ class ProductResource extends JsonResource
             'slug' => $this->slug,
             'sku' => $this->hasSku() ? $this->skus()->first()->code : null,
 			'short_description' => $this->short_description,
-			'description' => $this->description,
+            'description' => $this->description,
+            'price' => $this->hasSku() ? $this->skus()->first()->price : 0.00,
+            'cost' => $this->hasSku() ? $this->skus()->first()->price : 0.00,
             'is_active' => $this->is_active,
             'category' => [
                 'id' => $this->category->id,
