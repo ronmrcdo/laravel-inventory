@@ -13,6 +13,8 @@ abstract class BaseAdapter implements ResourceContract
 	 */
 	protected $resource;
 
+	abstract public static function collection($collection): array;
+
 	/**
 	 * Single resource transformer
 	 * 
