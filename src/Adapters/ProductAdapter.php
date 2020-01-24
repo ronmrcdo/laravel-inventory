@@ -4,14 +4,13 @@ namespace Ronmrcdo\Inventory\Adapters;
 
 use Ronmrcdo\Inventory\Resources\ProductResource;
 use Ronmrcdo\Inventory\Adapters\BaseAdapter;
-use Illuminate\Database\Eloquent\Model;
 
 class ProductAdapter extends BaseAdapter
 {
 	/**
 	 * Single resource transformer
 	 * 
-	 * @param \Illuminate\Database\Eloquent\Model $model
+	 * @param mixed $model
 	 */
 	public function __construct($model)
 	{

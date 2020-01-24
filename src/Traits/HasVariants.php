@@ -8,16 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ronmrcdo\Inventory\Exceptions\InvalidVariantException;
 use Ronmrcdo\Inventory\Exceptions\InvalidAttributeException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Ronmrcdo\Inventory\Models\ProductVariant;
 
 trait HasVariants
 {
 	/**
 	 * Add Variant to the product
 	 * 
-	 * $variant = array(
-	 *  'sku' => string,
-	 * 	'variation => []
-	 * )
 	 * @param array $variant
 	 */
 	public function addVariant($variant)
@@ -25,7 +22,14 @@ trait HasVariants
 		DB::beginTransaction();
 
 		try {
-			// Create the sku first
+			// if the give given variant array doesn't match the structure we want
+			// it will automatically throw an InvalidVariant Exception
+			// Verify if the given variant attributes already exist in the variants db
+			if (in_array($this->sortAttributes($variant['variation']), $this->getVariants())) {
+				throw new InvalidVariantException("Duplicate variation attributes!", 400);
+			}
+
+			// Create the sku first, so basically you can't add new attributes to the sku
 			$sku = $this->skus()->create(['code' => $variant['sku']]);
 
 			foreach ($variant['variation'] as $item) {
@@ -40,7 +44,7 @@ trait HasVariants
 			}
 			
 			DB::commit();
-		} catch (ModelNotFoundException $err) { // 
+		} catch (ModelNotFoundException $err) {
 			DB::rollBack();
 
 			throw new InvalidAttributeException('Invalid Attribute/Value', 404);
@@ -54,6 +58,81 @@ trait HasVariants
 		return $this;
 	}
 
+	/**
+	 * Get existing variants of the product
+	 * Note: There was a problem calling $this->variation relationship
+	 * it doesn't update model about the relationship that's why it always
+	 * return []
+	 * 
+	 * @return array
+	 */
+	protected function getVariants(): array
+	{
+		$variants = ProductVariant::where('product_id' , $this->id)->get();
+
+		return $this->transformVariant($variants);
+	}
+
+	/**
+	 * Sort the variant attributes by name. this is a helper function
+	 * to assert if the variant attributes already exist.
+	 * 
+	 * @param array $variant
+	 * @return array
+	 */
+	protected function sortAttributes($variant): array
+	{
+		return collect($variant)
+			->sortBy('option')
+			->map(function ($item) {
+				return [
+					'option' => strtolower($item['option']),
+					'value' => strtolower($item['value'])
+				];
+			})
+			->values()
+			->toArray();
+	}
+
+	/**
+	 * Transform the variant to match it to the input
+	 * variant. To able to assert if the given new variant
+	 * already exist with the current variations
+	 * 
+	 * @param \Ronmrcdo\Inventory\Models\ProductVariant Array<$variants>
+	 * @return array
+	 */
+	protected function transformVariant($variants): array
+	{
+		return collect($variants)
+				->map(function ($item) {
+					return [
+						'id' => $item->id,
+						'sku' => $item->productSku->code,
+						'attribute' => $item->attribute->name,
+						'option' => $item->option->value
+					];
+				})
+				->keyBy('id')
+				->groupBy('sku')
+				->map(function ($item) {
+					return collect($item)
+						->map(function ($var) {
+							return [
+								'option' => strtolower($var['attribute']),
+								'value' => strtolower($var['option'])
+							];
+						})
+						->toArray();
+				})
+				->all();
+	}
+
+	/**
+	 * Assert if the product has any sku given in the db
+	 * 
+	 * @return bool
+	 */
 	public function hasSku(): bool
 	{
 		return !! $this->skus()->count();

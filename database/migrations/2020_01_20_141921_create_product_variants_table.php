@@ -40,7 +40,8 @@ class CreateProductVariantsTable extends Migration
                 ->on('product_attribute_values')
                 ->onDelete('cascade');
 
-            $table->unique(['product_id', 'product_attribute_id', 'product_sku_id'], 'product_variation');
+            $table->unique(['product_id', 'product_attribute_id', 'product_sku_id'], 'product_variation_sku');
+            // $table->unique(['product_id', 'product_attribute_id', 'product_attribute_value_id'], 'product_variation_attribute');
         });
     }
 
