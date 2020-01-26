@@ -68,7 +68,7 @@ use Ronmrcdo\Inventory\Adapters\ProductVariantAdapter;
 
 $variantResource = ProductVariantAdapter::collection($product->getVariations());
 
-$variantResource->transform();
+return $variantResource;
 ```
 
 ### Product built-in functions or helpers

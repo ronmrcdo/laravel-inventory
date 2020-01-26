@@ -86,6 +86,94 @@ $productAdapter = (new ProductAdapter($sku->product))->transform();
 // Local Scope to find product by sku. Noted, it will return the parent product
 
 $product = Product::whereSku($sku)->firstOrFail();
+```
 
+## ProductAdapter
 
+Output
+```php
+ [
+  "id" => 1
+  "name" => "veniam quasi"
+  "slug" => "veniam-quasi"
+  "sku" => "WOOPROTSHIRT-SMBLK"
+  "short_description" => "Tempore rerum ratione tempora nulla. Blanditiis sit delectus consequatur tenetur. Ut iure quasi pariatur illo praesentium. Natus atque aut est non dolores. Qui quae ullam natus velit et."
+  "description" => "Omnis consequatur suscipit aut sed. Ad molestiae architecto a consequatur necessitatibus. Voluptatibus ut fugit ducimus ipsum atque maxime quae. Libero error est atque a. Corporis aut sapiente sed minima aut suscipit corporis illum. Illum expedita autem itaque. Nostrum ab quia officia id eum maiores aut. Voluptas et rem eum unde. Provident eos sequi aliquam est occaecati omnis. Libero ratione sapiente laborum et praesentium enim quis omnis."
+  "price" => "156"
+  "cost" => "156"
+  "is_active" => true
+  "category" => [
+    "id" => 1
+    "name" => "possimus eaque dolorum"
+  ]
+  "attributes" => [
+    [
+      "id" => 1
+      "name" => "size"
+      "options" => [
+        "small",
+        "medium",
+        "large"
+      ]
+    ],
+    [
+      "id" => 2
+      "name" => "color"
+      "options" => [
+        "black",
+        "white"
+      ]
+    ]
+  ]
+  "variations" => [
+    [
+      "id" => 1
+      "parent_product_id" => "1"
+      "sku" => "WOOPROTSHIRT-SMBLK"
+      "name" => "veniam quasi"
+      "short_description" => "Tempore rerum ratione tempora nulla. Blanditiis sit delectus consequatur tenetur. Ut iure quasi pariatur illo praesentium. Natus atque aut est non dolores. Qui quae ullam natus velit et."
+      "description" => "Omnis consequatur suscipit aut sed. Ad molestiae architecto a consequatur necessitatibus. Voluptatibus ut fugit ducimus ipsum atque maxime quae. Libero error est atque a. Corporis aut sapiente sed minima aut suscipit corporis illum. Illum expedita autem itaque. Nostrum ab quia officia id eum maiores aut. Voluptas et rem eum unde. Provident eos sequi aliquam est occaecati omnis. Libero ratione sapiente laborum et praesentium enim quis omnis."
+      "price" => "156"
+      "cost" => "61"
+      "category" => [
+        "id" => "1"
+        "name" => "possimus eaque dolorum"
+      ]
+      "attributes" => [
+        [
+          "name" => "color"
+          "option" => "black"
+        ],
+        [
+          "name" => "size"
+          "option" => "small"
+        ]
+      ]
+    ],
+    [
+      "id" => 2
+      "parent_product_id" => "1"
+      "sku" => "WOOPROTSHIRT-SMWHT"
+      "name" => "veniam quasi"
+      "short_description" => "Tempore rerum ratione tempora nulla. Blanditiis sit delectus consequatur tenetur. Ut iure quasi pariatur illo praesentium. Natus atque aut est non dolores. Qui quae ullam natus velit et."
+      "description" => "Omnis consequatur suscipit aut sed. Ad molestiae architecto a consequatur necessitatibus. Voluptatibus ut fugit ducimus ipsum atque maxime quae. Libero error est atque a. Corporis aut sapiente sed minima aut suscipit corporis illum. Illum expedita autem itaque. Nostrum ab quia officia id eum maiores aut. Voluptas et rem eum unde. Provident eos sequi aliquam est occaecati omnis. Libero ratione sapiente laborum et praesentium enim quis omnis."
+      "price" => "255"
+      "cost" => "93"
+      "category" => [
+        "id" => "1"
+        "name" => "possimus eaque dolorum"
+      ]
+      "attributes" => [
+        [
+          "name" => "color"
+          "option" => "white"
+        ],
+        [
+          "name" => "size"
+          "option" => "small"
+        ]
+      ]
+    ]
+  ]
+]
 ```

@@ -56,6 +56,8 @@ class ProductVariationTest extends TestCase
 
 		$productResource = new ProductAdapter($product);
 
+		dd($productResource->transform());
+
 		$this->assertArrayHasKey('variations', $productResource->transform(), 'It should have a variation');
 	}
 
