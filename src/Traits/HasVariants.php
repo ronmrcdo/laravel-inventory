@@ -52,12 +52,12 @@ trait HasVariants
 		} catch (ModelNotFoundException $err) {
 			DB::rollBack();
 
-			throw new InvalidAttributeException('Invalid Attribute/Value', 404);
+			throw new InvalidAttributeException($err->getMessage(), 404);
 		
 		} catch (\Throwable $err) {
 			DB::rollBack();
 
-			throw new InvalidVariantException('Invalid Variant Given', 400);
+			throw new InvalidVariantException($err->getMessage(), 400);
 		}
 
 		return $this;
@@ -80,7 +80,7 @@ trait HasVariants
 	 * 
 	 * @return array
 	 */
-	protected function getVariants(): array
+	public function getVariants(): array
 	{
 		$variants = ProductVariant::where('product_id' , $this->id)->get();
 
@@ -94,7 +94,7 @@ trait HasVariants
 	 * @param array $variant
 	 * @return array
 	 */
-	protected function sortAttributes($variant): array
+	public function sortAttributes($variant): array
 	{
 		return collect($variant)
 			->sortBy('option')
@@ -137,6 +137,8 @@ trait HasVariants
 								'value' => strtolower($var['option'])
 							];
 						})
+						->sortBy('option')
+						->values()
 						->toArray();
 				})
 				->all();

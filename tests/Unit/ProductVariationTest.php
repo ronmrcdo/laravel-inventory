@@ -21,11 +21,11 @@ class ProductVariationTest extends TestCase
 		$sizeAttr = factory(Attribute::class)->make([
 			'name' => 'size'
 		]);
-		$sizeTerms = ['Small', 'Medium', 'Large'];
+		$sizeTerms = ['small', 'medium', 'large'];
 		$colorAttr = factory(Attribute::class)->make([
 			'name' => 'color'
 		]);
-		$colorTerm = ['Black', 'White'];
+		$colorTerm = ['black', 'white'];
 
 		// Set the terms and attributes
 		$product->addAttribute($sizeAttr->name);
@@ -82,11 +82,11 @@ class ProductVariationTest extends TestCase
 		$sizeAttr = factory(Attribute::class)->make([
 			'name' => 'size'
 		]);
-		$sizeTerms = ['Small', 'Medium', 'Large'];
+		$sizeTerms = ['small', 'medium', 'large'];
 		$colorAttr = factory(Attribute::class)->make([
 			'name' => 'color'
 		]);
-		$colorTerm = ['Black', 'White'];
+		$colorTerm = ['black', 'white'];
 
 		// Set the terms and attributes
 		$product->addAttribute($sizeAttr->name);
@@ -128,11 +128,11 @@ class ProductVariationTest extends TestCase
 		$sizeAttr = factory(Attribute::class)->make([
 			'name' => 'size'
 		]);
-		$sizeTerms = ['Small', 'Medium', 'Large'];
+		$sizeTerms = ['small', 'medium', 'large'];
 		$colorAttr = factory(Attribute::class)->make([
 			'name' => 'color'
 		]);
-		$colorTerm = ['Black', 'White'];
+		$colorTerm = ['black', 'white'];
 
 		// Set the terms and attributes
 		$product->addAttribute($sizeAttr->name);
@@ -172,9 +172,12 @@ class ProductVariationTest extends TestCase
 			]
 		];
 
+		// dd($product->sortAttributes($newVariant['variation']), $product->getVariants());
+
 		// It should now throw due to same variation attributes of
 		// WOOPROTSHIRT-SMNEW and WOOPROTSHIRT-SMBLK
 		$product->addVariant($newVariant);
+
 	}
 
 	/** @test */
@@ -186,11 +189,11 @@ class ProductVariationTest extends TestCase
 		$sizeAttr = factory(Attribute::class)->make([
 			'name' => 'size'
 		]);
-		$sizeTerms = ['Small', 'Medium', 'Large'];
+		$sizeTerms = ['small', 'sedium', 'large'];
 		$colorAttr = factory(Attribute::class)->make([
 			'name' => 'color'
 		]);
-		$colorTerms = ['Black', 'White'];
+		$colorTerms = ['black', 'white'];
 
 		// Set the terms and attributes
 		$product->addAttribute($sizeAttr->name);
@@ -233,11 +236,11 @@ class ProductVariationTest extends TestCase
 		$sizeAttr = factory(Attribute::class)->make([
 			'name' => 'size'
 		]);
-		$sizeTerms = ['Small', 'Medium', 'Large'];
+		$sizeTerms = ['small', 'medium', 'large'];
 		$colorAttr = factory(Attribute::class)->make([
 			'name' => 'color'
 		]);
-		$colorTerms = ['Black', 'White'];
+		$colorTerms = ['black', 'white'];
 
 		// Set the terms and attributes
 		$product->addAttribute($sizeAttr->name);
@@ -281,11 +284,11 @@ class ProductVariationTest extends TestCase
 		$sizeAttr = factory(Attribute::class)->make([
 			'name' => 'size'
 		]);
-		$sizeTerms = ['Small', 'Medium', 'Large'];
+		$sizeTerms = ['small', 'medium', 'large'];
 		$colorAttr = factory(Attribute::class)->make([
 			'name' => 'color'
 		]);
-		$colorTerms = ['Black', 'White'];
+		$colorTerms = ['black', 'white'];
 
 		// Set the terms and attributes
 		$product->addAttribute($sizeAttr->name);

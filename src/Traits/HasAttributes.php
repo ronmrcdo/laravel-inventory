@@ -26,7 +26,7 @@ trait HasAttributes
 		} catch (\Throwable $err) { // No matter what error will occur we should throw invalidAttribute
 			DB::rollBack();
 
-			throw new InvalidAttributeException("Invalid attribute", 422);
+			throw new InvalidAttributeException($err->getMessage(), 422);
 		}
 
 		return $this;
@@ -50,7 +50,7 @@ trait HasAttributes
 		} catch (\Throwable $err) { // No matter what error will occur we should throw invalidAttribute
 			DB::rollBack();
 
-			throw new InvalidAttributeException("Invalid attribute", 422);
+			throw new InvalidAttributeException($err->getMessage(), 422);
 		}
 
 		return $this;
