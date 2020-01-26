@@ -80,7 +80,7 @@ trait HasVariants
 	 * 
 	 * @return array
 	 */
-	public function getVariants(): array
+	protected function getVariants(): array
 	{
 		$variants = ProductVariant::where('product_id' , $this->id)->get();
 
@@ -94,7 +94,7 @@ trait HasVariants
 	 * @param array $variant
 	 * @return array
 	 */
-	public function sortAttributes($variant): array
+	protected function sortAttributes($variant): array
 	{
 		return collect($variant)
 			->sortBy('option')
@@ -187,13 +187,17 @@ trait HasVariants
 	 * @throw \Ronmrcdo\Inventory\Exceptions\InvalidVariantException
 	 * @return void
 	 */
-	public function addSku(string $code): void
+	public function addSku(string $code, $price = 0.00, $cost = 0.00): void
 	{
 		if ($this->hasAttributes()) {
 			throw new InvalidVariantException("Cannot add single SKU due to there's a possible variation", 400);
 		}
 
-		$this->skus()->create(['code' => $code]);
+		$this->skus()->create([
+			'code' => $code,
+			'price' => $price,
+			'cost' => $cost
+		]);
 	}
 
 	/**

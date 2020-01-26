@@ -53,9 +53,20 @@ class Attribute extends Model
             })
             ->values()
             ->toArray();
+
             return $this->values()->createMany($terms);
         }
         return $this->values()->create(['value' => $value]);
+    }
+
+    /**
+     * Remove a term on an attribute
+     * 
+     * @param string $term
+     */
+    public function removeValue($term)
+    {
+        return $this->values()->where('value', $term)->firstOrFail()->delete();
     }
 
     /**

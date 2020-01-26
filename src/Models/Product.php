@@ -7,10 +7,13 @@ use Ronmrcdo\Inventory\Traits\Sluggable;
 use Ronmrcdo\Inventory\Traits\HasAttributes;
 use Ronmrcdo\Inventory\Traits\HasVariants;
 use Ronmrcdo\Inventory\Traits\HasCategories;
+use Ronmrcdo\Inventory\Traits\HasInventory;
+
 
 class Product extends Model
 {
-	use HasAttributes, HasVariants, Sluggable, HasCategories;
+	use HasAttributes, HasVariants, Sluggable, HasCategories, 
+		HasInventory;
 
 	/**
 	 * Defined table name

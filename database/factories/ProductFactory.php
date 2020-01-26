@@ -9,7 +9,6 @@ use Ronmrcdo\Inventory\Models\AttributeValue;
 use Ronmrcdo\Inventory\Models\ProductSku;
 use Ronmrcdo\Inventory\Models\ProductVariant;
 use Illuminate\Support\Str;
-
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {

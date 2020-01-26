@@ -2,6 +2,9 @@
 
 namespace Ronmrcdo\Inventory\Tests;
 
+use Illuminate\Support\Str;
+use Ronmrcdo\Inventory\Models\Product;
+use Ronmrcdo\Inventory\Models\Attribute;
 use Ronmrcdo\Inventory\ProductServiceProvider;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -48,5 +51,51 @@ abstract class TestCase extends OrchestraTestCase
             'database' => ':memory:',
             'prefix'   => '',
         ]);
+    }
+
+    /**
+     * Create a test product with variation
+     */
+    protected function createTestProduct()
+    {
+        $product = factory(Product::class)->create();
+
+		$sizeAttr = factory(Attribute::class)->make([
+			'name' => 'size'
+		]);
+		$sizeTerms = ['small', 'medium', 'large'];
+		$colorAttr = factory(Attribute::class)->make([
+			'name' => 'color'
+		]);
+		$colorTerm = ['black', 'white'];
+
+		// Set the terms and attributes
+		$product->addAttribute($sizeAttr->name);
+		$product->addAttribute($colorAttr->name);
+		$product->addAttributeTerm($sizeAttr->name, $sizeTerms);
+		$product->addAttributeTerm($colorAttr->name, $colorTerm);
+		
+		$variantSmallBlack = [
+			'sku' => Str::random(16),
+			'price' => rand(100,300),
+			'cost' => rand(50, 99),
+			'variation' => [
+				['option' => 'color', 'value' => 'black'],
+				['option' => 'size', 'value' => 'small'],
+			]
+		];
+		$variantSmallWhite = [
+			'sku' => Str::random(16),
+			'price' => rand(100,300),
+			'cost' => rand(50, 99),
+			'variation' => [
+				['option' => 'color', 'value' => 'white'],
+				['option' => 'size', 'value' => 'small'],
+			]
+		];
+		$product->addVariant($variantSmallBlack);
+		$product->addVariant($variantSmallWhite);
+
+		return $product;
     }
 }

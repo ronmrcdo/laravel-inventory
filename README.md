@@ -7,3 +7,13 @@ Laravel Inventory provides the basic of inventory management.
 
 ## Requirements
 * Laravel 5.6+
+
+<li>
+    <a href="">Usage</a>
+    <ul>
+        <li><a href="docs/Product.md">Product</a></li>
+        <li><a href="docs/Attribute.md">Attribute and Terms</a></li>
+        <li><a href="docs/Variation.md">Variations</a></li>
+        <li><a href="docs/Exceptions.md">Exceptions</a></li>
+    </ul>
+</li>

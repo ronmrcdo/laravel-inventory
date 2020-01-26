@@ -32,7 +32,7 @@ class ProductVariationTest extends TestCase
 		$product->addAttribute($colorAttr->name);
 		$product->addAttributeTerm($sizeAttr->name, $sizeTerms);
 		$product->addAttributeTerm($colorAttr->name, $colorTerm);
-		
+
 		$variantSmallBlack = [
 			'sku' => 'WOOPROTSHIRT-SMBLK',
 			'price' => rand(100,300),
@@ -68,6 +68,7 @@ class ProductVariationTest extends TestCase
 		$product->addSku(Str::random());
 
 		$productResource = new ProductAdapter($product);
+
 		$this->assertArrayHasKey('sku', $productResource->transform(), 'It should have an sku');
 	}
 
@@ -115,6 +116,7 @@ class ProductVariationTest extends TestCase
 		];
 		$product->addVariant($variantSmallBlack);
 		$product->addVariant($variantSmallWhite);
+
 	}
 
 	/** @test */
@@ -171,8 +173,6 @@ class ProductVariationTest extends TestCase
 				['option' => 'color', 'value' => 'black']
 			]
 		];
-
-		// dd($product->sortAttributes($newVariant['variation']), $product->getVariants());
 
 		// It should now throw due to same variation attributes of
 		// WOOPROTSHIRT-SMNEW and WOOPROTSHIRT-SMBLK

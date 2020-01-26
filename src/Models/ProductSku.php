@@ -59,4 +59,14 @@ class ProductSku extends Model
     {
         return $this->hasMany('Ronmrcdo\Inventory\Models\ProductVariant', 'product_sku_id');
     }
+
+    /**
+     * Product sku has many stocks
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function stocks(): HasMany
+    {
+        return $this->hasMany('Ronmrcdo\Inventory\Models\InventoryStock');
+    }
 }

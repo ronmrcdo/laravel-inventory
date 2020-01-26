@@ -57,6 +57,56 @@ trait HasAttributes
 	}
 
 	/**
+	 * It should remove attribute from product
+	 * 
+	 * @param string $key
+	 * @return self
+	 */
+	public function removeAttribute($attr)
+	{
+		DB::beginTransaction();
+
+		try {
+			$attribute = $this->attributes()->where('name', $attr)->firstOrFail();
+
+			$attribute->delete();
+
+			DB::commit();
+		} catch (\Throwable $err) { // No matter what error will occur we should throw invalidAttribute
+			DB::rollBack();
+
+			throw new InvalidAttributeException($err->getMessage(), 422);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * It should remove attribute from product
+	 * 
+	 * @param string $key
+	 * @return self
+	 */
+	public function removeAttributeTerm(string $attribute, string $term)
+	{
+		DB::beginTransaction();
+
+		try {
+			$attribute = $this->attributes()->where('name', $attribute)->firstOrFail();
+
+			$attribute->removeValue($term);
+
+			DB::commit();
+		} catch (\Throwable $err) { // No matter what error will occur we should throw invalidAttribute
+			DB::rollBack();
+
+			throw new InvalidAttributeException($err->getMessage(), 422);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Assert if the Product has attributes
 	 * 
 	 * @return bool

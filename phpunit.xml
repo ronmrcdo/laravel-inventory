@@ -34,7 +34,7 @@
         <env name="MAIL_DRIVER" value="log"/>
         <ini name="memory_limit" value="512M" />
     </php>
-    <logging>
+    <!-- <logging>
         <log type="coverage-clover" target="clover.xml"/>
-    </logging>
+    </logging> -->
 </phpunit>

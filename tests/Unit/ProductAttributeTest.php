@@ -91,4 +91,44 @@ class ProductAttributeTest extends TestCase
 		
 		$product->addAttributeTerm('test', 'test');
 	}
+
+	/** @test */
+	public function itShouldRemoveAttributeFromProduct()
+	{
+		$product = factory(Product::class)->create();
+		$size = rand(2,4);
+		$attributes = factory(Attribute::class, $size)->make();
+
+		$product->addAttributes($attributes->toArray());
+
+		$selected = sizeof($attributes) < 1 ? 0 : rand(0, sizeof($attributes) - 1);
+		
+		$product->removeAttribute($attributes[$selected]['name']);
+
+		$this->assertEquals($size - 1, sizeof($product->loadAttributes()->toArray()), 'Attributes should be equal to product attribute');
+	}
+
+	/** @test */	
+	public function itShouldRemoveAttributeTermFromProduct()
+	{
+		$product = factory(Product::class)->create();
+		$attribute = factory(Attribute::class)->create([
+			'product_id' => $product->id
+		]);
+		$size = rand(2,5);
+
+		$options = factory(AttributeValue::class, $size)->make();
+
+		// Add the terms on the product
+		$options->each(function ($option) use ($product, $attribute) {
+			$product->addAttributeTerm($attribute->name, $option->value);
+		});
+
+		$selected = sizeof($options) < 1 ? 0 : rand(0, sizeof($options) - 1);
+
+		$product->removeAttributeTerm($attribute->name, $options[$selected]['value']);
+
+
+		$this->assertEquals(sizeof($product->loadAttributes()->first()->toArray()['values']), $size - 1, 'It should attach all the options');
+	}
 }
