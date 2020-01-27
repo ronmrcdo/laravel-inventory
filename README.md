@@ -6,7 +6,7 @@ This package is currently in development
 Laravel Inventory provides the basic of inventory management. This package is based from the <a href="https://github.com/mauricecalhoun/inventory">stevebauman/inventory</a>
 
 ## Requirements
-* Laravel 5.6+
+* Laravel 5.8
 
 ## Overview
 <ul>
@@ -18,7 +18,8 @@ Laravel Inventory provides the basic of inventory management. This package is ba
 
 ## Versions
 
-Initial Release 
+Initial Release
+
 <ul>
     <li>1.0.0</li>
 </ul>
