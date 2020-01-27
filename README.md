@@ -15,3 +15,9 @@ Laravel Inventory provides the basic of inventory management. This package is ba
     <li><a href="docs/Variation.md">Variations</a></li>
     <li><a href="docs/Exceptions.md">Exceptions</a></li>
 </ul>
+
+## Versions
+
+<ul>
+    <li>1.0.0</li>
+</ul>
