@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ronmrcdo\Inventory\Traits\HasItemStocks;
 
 class InventoryStock extends Model
 {
+    use HasItemStocks;
+
     /**
      * Table name
      * 
@@ -86,11 +89,10 @@ class InventoryStock extends Model
     /**
      * Relation to the stock Movements
      * 
-     * @return \lluminate\Database\Eloquent\Relations\BelongsTo
+     * @return \lluminate\Database\Eloquent\Relations\HasMany
      */
-    public function stockMovements(): HasMany
+    public function movements(): HasMany
     {
-        return $this->belongsTo('Ronmrcdo\Inventory\Models\InventoryStockMovement');
+        return $this->hasMany('Ronmrcdo\Inventory\Models\InventoryStockMovement', 'stock_id', 'id');
     }
-
 }

@@ -21,9 +21,6 @@
         "fzaninotto/faker": "^1.9@dev"
     },
     "autoload": {
-        "files": [
-            "src/Utilities/Helper.php"
-        ],
         "psr-4": {
             "Ronmrcdo\\Inventory\\": "src/"
         }

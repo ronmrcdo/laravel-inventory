@@ -4,9 +4,12 @@ namespace Ronmrcdo\Inventory\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Ronmrcdo\Inventory\Traits\HasItemMovements;
 
 class InventoryStockMovement extends Model
 {
+    use HasItemMovements;
+
     /**
      * Table name
      * 
@@ -32,14 +35,4 @@ class InventoryStockMovement extends Model
     protected $guarded = [
         'id', 'created_at', 'updated_at'
     ];
-
-    /**
-     * Stock relation
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function stock(): BelongsTo
-    {
-        return $this->belongsTo('Ronmrcdo\Inventory\Models\InventoryStock');
-    }
 }
