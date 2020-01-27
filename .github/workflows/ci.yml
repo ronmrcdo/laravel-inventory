@@ -25,11 +25,5 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: svikramjeet/git-action-laravel-phpunit@master
-
-  phpcs:
-    - name: PHP CS Fixer
-      uses: StephaneBour/actions-php-cs-fixer@1.0
-      with:
-        dir: './src'
     
    
