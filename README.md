@@ -18,6 +18,7 @@ Laravel Inventory provides the basic of inventory management. This package is ba
 
 ## Versions
 
+Initial Release 
 <ul>
     <li>1.0.0</li>
 </ul>
