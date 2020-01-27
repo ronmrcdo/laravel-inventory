@@ -1,0 +1,43 @@
+name: PHP Composer
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+    # Docs: https://getcomposer.org/doc/articles/scripts.md
+
+    # - name: Run test suite
+    #   run: composer run-script test
+  phpunit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      # For YAML Actions, use v1 or later
+      - uses: pxgamer/phpunit-action@master
+        with:
+          # If there isn't a PHPUnit config, specify files or directories to test
+          command: vendor/bin/phpunit
+          
+          
+  securitycheck:
+     runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - name: PHP Security Checker
+          uses: StephaneBour/actions-php-security-checker@1.0
+          with:
+            # Path to composer.lock
+            composer-lock: # optional, default is ./composer.lock
+    
+   
