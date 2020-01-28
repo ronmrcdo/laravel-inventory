@@ -1,6 +1,8 @@
 # :construction: Inventory Package for Laravel
 
-This package is currently in development
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ronmrcdo/laravel-inventory/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ronmrcdo/laravel-inventory/?branch=master)
+
+Pre-release
 
 ## Description
 Laravel Inventory provides the basic of inventory management. This package is based from the <a href="https://github.com/mauricecalhoun/inventory">stevebauman/inventory</a>
@@ -18,8 +20,6 @@ Laravel Inventory provides the basic of inventory management. This package is ba
 
 ## Versions
 
-Initial Release
-
 <ul>
-    <li>1.0.0</li>
+    <li><a href="https://github.com/ronmrcdo/laravel-inventory/releases/tag/v0.1.1-beta">0.1.1-beta</a></li>
 </ul>
