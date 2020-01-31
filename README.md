@@ -1,6 +1,7 @@
 # :construction: Inventory Package for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-webhook-server.svg?style=flat-square)](https://packagist.org/packages/ronmrcdo/inventory)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/ronmrcdo/inventory.svg?style=flat-square)](https://packagist.org/packages/ronmrcdo/inventory)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ronmrcdo/laravel-inventory/run-tests?label=tests)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ronmrcdo/laravel-inventory/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ronmrcdo/laravel-inventory/?branch=master)
 
 Pre-release
