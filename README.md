@@ -8,7 +8,16 @@ Pre-release
 Laravel Inventory provides the basic of inventory management. This package is based from the <a href="https://github.com/mauricecalhoun/inventory">stevebauman/inventory</a>
 
 ## Requirements
-* Laravel 5.8
+* Laravel 6.0
+* PHP ^7.2
+
+## Installation
+
+You can install the package via composer:
+
+```bash
+composer require ronmrcdo/inventory
+```
 
 ## Overview
 <ul>

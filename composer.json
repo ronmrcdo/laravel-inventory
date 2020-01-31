@@ -10,9 +10,10 @@
         }
     ],
     "keywords": ["Inventory", "Product", "Laravel"],
+    "homepage": "https://github.com/ronmrcdo/laravel-inventory",
     "require": {
         "php": "^7.2",
-        "illuminate/support": "^5.7"
+        "illuminate/support": "^6.0|^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0",
@@ -45,6 +46,5 @@
     },
     "scripts-descriptions": {
         "test": "Run Unit Testing"
-    },
-    "minimum-stability": "dev"
+    }
 }
