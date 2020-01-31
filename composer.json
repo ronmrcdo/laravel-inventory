@@ -11,6 +11,7 @@
     ],
     "keywords": ["Inventory", "Product", "Laravel"],
     "require": {
+        "php": "^7.2",
         "illuminate/support": "^5.7"
     },
     "require-dev": {
