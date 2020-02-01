@@ -15,8 +15,8 @@ class VariantResource extends JsonResource
 			'name' => $this->product->name,
 			'short_description' => $this->product->short_description,
 			'description' => $this->product->description,
-			'price' => $this->price,
-			'cost' => $this->cost,
+			'price' => number_format($this->price, 2, '.', ''),
+			'cost' => number_format($this->cost, 2, '.', ''),
 			'category' => [
 				'id' => $this->product->category_id,
 				'name' => $this->product->category->name

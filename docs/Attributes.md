@@ -1,10 +1,10 @@
-## Product Attributes and Terms
+# Attribute and Terms
 
-Product attributes are options to enable product to create a variation
+Product attributes are options to enable product to have a variation
 
 ### Creating Product attribute and term
 
-There are two built-in functions to create a product attribute. if there's an error occured during the creation of attribute it will throw an ```InvalidAttributeException```
+There are two built-in functions in creating a product attribute. if there's an error occured during the creation of attribute or term it will throw an ```InvalidAttributeException```
 
 ```php
 
@@ -20,7 +20,7 @@ $product->addAttributes([
 
 ### Adding Term on attributes
 
-Terms are the values of attribute e.g for size - small, medium, large and for color - white, black and etc.
+Terms are the values of attribute e.g for size (attribute) - small, medium, large (terms) and for color (attribute) - white, black and etc. (terms)
 
 
 ```php

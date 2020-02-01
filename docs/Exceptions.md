@@ -2,7 +2,7 @@
 
 Here are the list of exceptions
 
-1. InvalidAttributeException - it means there's an error regarding the given attribute or term.
+1. ```InvalidAttributeException``` - it means there's an error regarding the given attribute or term.
 
 ```php
 
@@ -13,7 +13,7 @@ if ($err instanceof InvalidAttributeException) {
 }
 ```
 
-2. InvalidVariantException - it means that there's an error regarding the given variation
+2. ```InvalidVariantException``` - it means that there's an error regarding the given variation
 
     ex. 
 
