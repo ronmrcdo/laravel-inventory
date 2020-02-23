@@ -2,7 +2,7 @@
 
 namespace Ronmrcdo\Inventory\Adapters;
 
-use Ronmrcdo\Inventory\Resources\VariantResource;
+use Ronmrcdo\Inventory\Resources\AttributeResource;
 use Ronmrcdo\Inventory\Adapters\BaseAdapter;
 
 class ProductAttributeAdapter extends BaseAdapter

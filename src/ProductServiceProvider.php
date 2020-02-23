@@ -20,6 +20,16 @@ class ProductServiceProvider extends ServiceProvider
 	}
 
 	/**
+	 * Register the configurations
+	 * 
+	 * @return void
+	 */
+	public function register(): void
+	{
+		$this->mergeConfigFrom(__DIR__.'/../config/laravel-inventory.php', 'laravel-inventory');
+	}
+
+	/**
      * Get the services provided by the provider.
      *
      * @return array
@@ -36,10 +46,14 @@ class ProductServiceProvider extends ServiceProvider
 	 */
 	protected function bootForConsole(): void
 	{
+		$this->publishes([
+            __DIR__.'/../config/laravel-inventory.php' => base_path('config/laravel-inventory.php'),
+		], 'config');
+		
 		$this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
 		$this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations')
-        ], 'inventory.migrations');
+        ], 'migrations');
 	}
 }

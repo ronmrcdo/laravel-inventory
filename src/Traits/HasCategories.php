@@ -13,6 +13,6 @@ trait HasCategories
 	 */
 	public function category(): BelongsTo
 	{
-		return $this->belongsTo('Ronmrcdo\Inventory\Models\Category');
+		return $this->belongsTo(config('laravel-inventory.category'));
 	}
 }
