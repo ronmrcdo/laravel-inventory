@@ -63,7 +63,7 @@ class Category extends Model
 	 */
 	public function children(): HasMany
 	{
-		return $this->hasMany('Ronmrcdo\Inventory\Models\Category', 'parent_id', 'id');
+		return $this->hasMany(config('laravel-inventory.category'), 'parent_id', 'id');
 	}
 
 	/**
@@ -73,6 +73,6 @@ class Category extends Model
 	 */
 	public function parent(): HasOne
 	{
-		return $this->hasOne('Ronmrcdo\Inventory\Models\Category', 'id', 'parent_id');
+		return $this->hasOne(config('laravel-inventory.category'), 'id', 'parent_id');
 	}
 }

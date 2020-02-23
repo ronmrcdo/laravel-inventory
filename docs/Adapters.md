@@ -262,3 +262,45 @@ it will return a collection of variant in array format
   ]
 ]
 ```
+
+## Extending the Adapters
+
+If you want to extend or modify the adapters you can create your own new resource
+and use the BaseAdapter
+
+```php
+<?php
+
+namespace Your\Namespace;
+
+use Ronmrcdo\Inventory\Adapters\BaseAdapter;
+use Your\Namespace\Resources\ProductResource;
+
+class ProductAdapter extends BaseAdapter
+{
+    /**
+     * Single resource transformer
+     * 
+     * @param mixed $model
+     */
+    public function __construct($model)
+    {
+        parent::__construct(new ProductResource($model));
+    }
+
+    /**
+     * Static function for the collection
+     * 
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @return array
+     */
+    public static function collection($collection): array
+    {
+        $resource = new self($collection);
+        $resource->setResource(ProductResource::collection($collection));
+
+        return $resource->transform();
+    }
+}
+
+>

@@ -43,6 +43,6 @@ trait HasProducts
 	 */
 	public function products(): HasMany
 	{
-		return $this->hasMany('Ronmrcdo\Inventory\Models\Product');
+		return $this->hasMany(config('laravel-inventory.product'));
 	}
 }

@@ -76,7 +76,7 @@ class Attribute extends Model
      */
     public function product(): BelongsTo
     {
-        return $this->belongsTo('Ronmrcdo\Inventory\Models\Product');
+        return $this->belongsTo(config('laravel-inventory.product'));
     }
 
     /**

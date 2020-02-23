@@ -41,3 +41,48 @@ $sku = Product::findBySku($sku);
 $product = Product::whereSku($sku)->firstOrFail();
 ```
 
+## Extending Product and Category Model
+
+If you want to extend the product and category model like, adding attributes
+you can edit the config of laravel-inventory to use your product model and just
+extend the package product/category model
+
+ex.
+```php
+<?php
+
+return [
+    /**
+     * Base Product class
+     * 
+     */
+    'product' => \Your\Namespace\Product::class,
+
+    /**
+     * Base Category Class
+     * 
+     */
+    'category' => \Your\Namespace\Category::class
+];
+```
+
+then in your Product model class
+
+```php
+<?php
+
+namespace Your\Namespace;
+
+use Ronmrcdo\Inventory\Models\Product as BaseProduct;
+
+class Product extends BaseProduct
+{
+    protected $fillable = [
+        //
+    ];
+}
+
+>
+```
+
+same with the category class
